@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selena ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffb6c1,#ffe6eb);
+    font-family: Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* Zarf */
+.envelope{
+    position:relative;
+    width:260px;
+    height:260px;
+    cursor:pointer;
+}
+
+/* Kalp */
+.heart{
+    position:absolute;
+    width:160px;
+    height:160px;
+    background:#ff2e63;
+    transform:rotate(-45deg);
+    top:50px;
+    left:50px;
+}
+
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    background:#ff2e63;
+    border-radius:50%;
+}
+
+.heart::before{ top:-80px; left:0; }
+.heart::after{ left:80px; top:0; }
+
+/* Kart */
+.card{
+    position:absolute;
+    top:40px;
+    left:20px;
+    width:220px;
+    height:220px;
+    background:white;
+    border-radius:14px;
+    text-align:center;
+    padding:15px;
+    box-sizing:border-box;
+    transform:translateY(80px);
+    opacity:0;
+    transition:0.8s ease;
+    z-index:-1;
+}
+
+/* Açılınca */
+.envelope.open .card{
+    transform:translateY(-110px);
+    opacity:1;
+    z-index:2;
+}
+
+.card h1{
+    color:#ff2e63;
+    margin-bottom:10px;
+}
+
+/* Foto */
+.card img{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #ff2e63;
+    box-shadow:0 0 25px rgba(255,46,99,0.7);
+}
+
+/* Alttaki yazı */
+.love-text{
+    position:fixed;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    font-size:16px;
+    color:white;
+    opacity:0;
+    transition:1s ease;
+    text-shadow:0 0 10px rgba(0,0,0,0.4);
+    pointer-events:none;
+}
+
+.love-text span{
+    color:#ff2e63;
+    font-weight:bold;
+}
+
+/* Açılınca yazı */
+.show-text{
+    opacity:1;
+}
+
+/* Uçan kalpler */
+.floating-heart{
+    position:absolute;
+    font-size:22px;
+    color:#ff2e63;
+    animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+    from{ transform:translateY(0); opacity:1; }
+    to{ transform:translateY(-600px); opacity:0; }
+}
+
+/* Telefon uyumu */
+@media(max-width:480px){
+    .envelope{ transform:scale(0.85); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openEnvelope(this)">
+    <div class="heart"></div>
+
+    <div class="card">
+        <h1>SELENAM</h1>
+        <img src="selena.jpg">
+    </div>
+</div>
+
+<div class="love-text" id="loveText">
+    gelecekteki aşkından<br>
+    <span>kaan sacihan sevgilerle &lt;3</span>
+</div>
+
+<audio id="music">
+    <source src="romantic-homocide.webm" type="audio/mpeg">
+</audio>
+
+<script>
+function openEnvelope(el){
+    el.classList.add("open");
+
+    document.getElementById("music").play();
+    document.getElementById("loveText").classList.add("show-text");
+
+    for(let i=0;i<15;i++){
+        createHeart();
+    }
+}
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.bottom = "0px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),4000);
+}
+</script>
+
+</body>
+</html>
